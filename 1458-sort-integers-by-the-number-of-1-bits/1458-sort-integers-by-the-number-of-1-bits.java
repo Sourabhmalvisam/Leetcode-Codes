@@ -2,12 +2,12 @@ class Solution {
    	public int[] sortByBits(int[] arr) {
         int n = arr.length, res[] = new int[n];
         for (int i = 0; i < n; i++) {
-            res[i] = countBitOne(arr[i])*10001 + arr[i];
+            res[i] = countBitOne(arr[i])*10002 + arr[i];
         }
         
         Arrays.sort(res);
         for (int i = 0; i < n; i++) {
-            res[i] %= 10001;
+            res[i] %= 10002;
         }
         
         return res;
