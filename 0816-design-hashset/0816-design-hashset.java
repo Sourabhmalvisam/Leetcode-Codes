@@ -1,23 +1,37 @@
 class MyHashSet {
-    private boolean[] array;
+    private static final int SIZE = 1000; // Choose a suitable size for your HashSet
+    private LinkedList<Integer>[] table;
 
     public MyHashSet() {
-        // Initialize an array to store the HashSet elements.
-        array = new boolean[1000001]; // Assuming the input range for keys is 0 to 1000000
+        table = new LinkedList[SIZE];
+    }
+
+    private int hash(int key) {
+        return key % SIZE;
     }
 
     public void add(int key) {
-        // Set the value at the index corresponding to the key to true.
-        array[key] = true;
+        int index = hash(key);
+        if (table[index] == null) {
+            table[index] = new LinkedList<>();
+        }
+        if (!table[index].contains(key)) {
+            table[index].add(key);
+        }
     }
 
     public void remove(int key) {
-        // Set the value at the index corresponding to the key to false.
-        array[key] = false;
+        int index = hash(key);
+        if (table[index] != null) {
+            table[index].remove((Integer) key);
+        }
     }
 
     public boolean contains(int key) {
-        // Return the value at the index corresponding to the key.
-        return array[key];
+        int index = hash(key);
+        if (table[index] != null) {
+            return table[index].contains(key);
+        }
+        return false;
     }
 }
